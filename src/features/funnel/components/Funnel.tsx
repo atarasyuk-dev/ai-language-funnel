@@ -5,6 +5,7 @@ import { useFunnelStore } from '../store/funnel.store';
 import { useFunnelNavigation } from '../hooks/useFunnelNavigation';
 import { ProgressBar } from './ProgressBar';
 import { FunnelStep } from './FunnelStep';
+import { SuccessScreen } from './SuccessScreen';
 
 export function Funnel() {
   const { isSubmitting, isSubmitted, error, setSubmitting, setSubmitted, setError } =
@@ -40,14 +41,7 @@ export function Funnel() {
   }
 
   if (isSubmitted) {
-    // SuccessScreen rendered here in Phase 9
-    return (
-      <div className="flex flex-col items-center justify-center flex-1 text-center gap-4 py-12">
-        <div className="text-5xl">🎉</div>
-        <h2 className="text-2xl font-bold text-slate-800">You&apos;re all set!</h2>
-        <p className="text-slate-500">Check your inbox — your plan is on its way.</p>
-      </div>
-    );
+    return <SuccessScreen answers={answers} />;
   }
 
   if (!currentQuestion) return null;
@@ -67,6 +61,7 @@ export function Funnel() {
         direction={direction}
         onNext={handleNext}
         onSubmit={handleSubmit}
+        isSubmitting={isSubmitting}
         error={error}
       />
 

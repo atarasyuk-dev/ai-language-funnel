@@ -3,6 +3,9 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { OptionCard } from './OptionCard';
+import { SliderStep } from './SliderStep';
+import { ResultPreview } from './ResultPreview';
+import { EmailStep } from './EmailStep';
 import { useFunnelStore } from '../store/funnel.store';
 import type { FunnelQuestion, FunnelAnswers, FunnelDirection } from '../types/funnel.types';
 
@@ -12,6 +15,7 @@ type FunnelStepProps = {
   direction: FunnelDirection;
   onNext: () => void;
   onSubmit?: (email: string) => void;
+  isSubmitting: boolean;
   error: string | null;
 };
 
@@ -40,10 +44,11 @@ type StepContentProps = {
   answers: FunnelAnswers;
   onNext: () => void;
   onSubmit?: (email: string) => void;
+  isSubmitting: boolean;
   error: string | null;
 };
 
-function StepContent({ question, answers, onNext, onSubmit, error }: StepContentProps) {
+function StepContent({ question, answers, onNext, onSubmit, isSubmitting, error }: StepContentProps) {
   const { setAnswer } = useFunnelStore();
 
   if (question.type === 'single-select' || question.type === 'multi-select') {
@@ -72,16 +77,29 @@ function StepContent({ question, answers, onNext, onSubmit, error }: StepContent
     );
   }
 
-  // Phase 9 components — rendered via dynamic import to avoid circular deps at build time
-  // Stubs replaced in Phase 9
-  return (
-    <div className="flex items-center justify-center h-40 text-slate-400 text-sm">
-      {question.type}
-    </div>
-  );
+  if (question.type === 'slider') {
+    return <SliderStep question={question} answers={answers} onNext={onNext} />;
+  }
+
+  if (question.type === 'result-preview') {
+    return <ResultPreview answers={answers} onNext={onNext} />;
+  }
+
+  if (question.type === 'email') {
+    return (
+      <EmailStep
+        answers={answers}
+        onSubmit={onSubmit!}
+        isSubmitting={isSubmitting}
+        error={error}
+      />
+    );
+  }
+
+  return null;
 }
 
-export function FunnelStep({ question, answers, direction, onNext, onSubmit, error }: FunnelStepProps) {
+export function FunnelStep({ question, answers, direction, onNext, onSubmit, isSubmitting, error }: FunnelStepProps) {
   const title = resolveText(question.title, answers);
   const subtitle = resolveText(question.subtitle, answers);
 
@@ -107,6 +125,7 @@ export function FunnelStep({ question, answers, direction, onNext, onSubmit, err
           answers={answers}
           onNext={onNext}
           onSubmit={onSubmit}
+          isSubmitting={isSubmitting}
           error={error}
         />
       </motion.div>
