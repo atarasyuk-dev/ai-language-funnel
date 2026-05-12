@@ -74,8 +74,8 @@ export function SuccessScreen({ answers }: SuccessScreenProps) {
         transition={{ delay: 0.3 }}
         className="flex flex-col gap-2"
       >
-        <h2 className="text-2xl font-bold text-slate-800">You&apos;re all set!</h2>
-        <p className="text-slate-500 leading-relaxed">
+        <h2 className="text-2xl font-bold text-slate-800 dark:text-white">You&apos;re all set!</h2>
+        <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
           Your AI tutor plan for <span className="font-semibold text-violet-600">{goalLabel}</span> is on its way to{' '}
           <span className="font-semibold text-slate-700">{answers.email}</span>.
         </p>
@@ -89,12 +89,12 @@ export function SuccessScreen({ answers }: SuccessScreenProps) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 + 0.4, type: 'spring', stiffness: 300, damping: 24 }}
-            className="flex items-start gap-3 bg-violet-50 rounded-2xl px-4 py-3"
+            className="flex items-start gap-3 bg-violet-50 dark:bg-violet-900/30 rounded-2xl px-4 py-3"
           >
-            <span className="flex-shrink-0 w-5 h-5 rounded-full bg-violet-200 text-violet-700 text-xs font-bold flex items-center justify-center mt-0.5">
+            <span className="flex-shrink-0 w-5 h-5 rounded-full bg-violet-200 dark:bg-violet-800 text-violet-700 dark:text-violet-300 text-xs font-bold flex items-center justify-center mt-0.5">
               {i + 1}
             </span>
-            <span className="text-sm text-slate-600 leading-snug">{step}</span>
+            <span className="text-sm text-slate-600 dark:text-slate-300 leading-snug">{step}</span>
           </motion.div>
         ))}
       </div>
@@ -103,7 +103,7 @@ export function SuccessScreen({ answers }: SuccessScreenProps) {
       <div className="w-full flex flex-col gap-3 mt-2">
         <button
           onClick={handleShare}
-          className="w-full flex items-center justify-center gap-2 border-2 border-violet-200 text-violet-600 font-semibold py-3.5 rounded-2xl hover:bg-violet-50 transition-colors"
+          className="w-full flex items-center justify-center gap-2 border-2 border-violet-200 dark:border-violet-700 text-violet-600 dark:text-violet-400 font-semibold py-3.5 rounded-2xl hover:bg-violet-50 dark:hover:bg-violet-900/30 transition-colors"
         >
           <Share2 className="w-4 h-4" />
           {copied ? 'Link copied!' : 'Share with a friend'}

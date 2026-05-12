@@ -1,12 +1,14 @@
 // src/features/funnel/components/FunnelStep.tsx
 'use client';
 
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { OptionCard } from './OptionCard';
 import { SliderStep } from './SliderStep';
 import { ResultPreview } from './ResultPreview';
 import { EmailStep } from './EmailStep';
 import { useFunnelStore } from '../store/funnel.store';
+import { trackEvent } from '../utils/analytics';
 import type { FunnelQuestion, FunnelAnswers, FunnelDirection } from '../types/funnel.types';
 
 type FunnelStepProps = {
@@ -39,6 +41,11 @@ function resolveText(
   return typeof value === 'function' ? value(answers) : value;
 }
 
+function resolveTitle(question: FunnelQuestion, answers: FunnelAnswers, abVariant: 'A' | 'B'): string | undefined {
+  const source = abVariant === 'B' && question.titleB ? question.titleB : question.title;
+  return resolveText(source, answers);
+}
+
 type StepContentProps = {
   question: FunnelQuestion;
   answers: FunnelAnswers;
@@ -56,6 +63,7 @@ function StepContent({ question, answers, onNext, onSubmit, isSubmitting, error 
 
     function handleSelect(optionId: string) {
       setAnswer(question.id, optionId);
+      trackEvent('option_selected', { step: question.step, field: question.id, value: optionId });
       if (question.type === 'single-select') {
         setTimeout(() => {
           setError(null);
@@ -103,8 +111,14 @@ function StepContent({ question, answers, onNext, onSubmit, isSubmitting, error 
 }
 
 export function FunnelStep({ question, answers, direction, onNext, onSubmit, isSubmitting, error }: FunnelStepProps) {
-  const title = resolveText(question.title, answers);
+  const { abVariant } = useFunnelStore();
+  const title = resolveTitle(question, answers, abVariant);
   const subtitle = resolveText(question.subtitle, answers);
+
+  useEffect(() => {
+    trackEvent('step_viewed', { step: question.step, type: question.type, ab: abVariant });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [question.step]);
 
   return (
     <AnimatePresence mode="wait" custom={direction}>
@@ -119,8 +133,8 @@ export function FunnelStep({ question, answers, direction, onNext, onSubmit, isS
         className="flex flex-col flex-1"
       >
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-slate-800 leading-tight mb-2">{title}</h2>
-          {subtitle && <p className="text-slate-500 text-base leading-relaxed">{subtitle}</p>}
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-white leading-tight mb-2">{title}</h2>
+          {subtitle && <p className="text-slate-500 dark:text-slate-400 text-base leading-relaxed">{subtitle}</p>}
         </div>
 
         <StepContent

@@ -22,10 +22,10 @@ export function OptionCard({ option, isSelected, onSelect, multiSelect = false }
       whileTap={{ scale: 0.97 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       className={cn(
-        'w-full text-left flex items-center gap-4 p-4 rounded-2xl border-2 bg-white transition-colors duration-150 cursor-pointer',
+        'w-full text-left flex items-center gap-4 p-4 rounded-2xl border-2 bg-white dark:bg-slate-800 transition-colors duration-150 cursor-pointer',
         isSelected
-          ? 'border-violet-500 bg-violet-50'
-          : 'border-slate-100 hover:border-violet-200',
+          ? 'border-violet-500 bg-violet-50 dark:bg-violet-900/30'
+          : 'border-slate-100 dark:border-slate-700 hover:border-violet-200 dark:hover:border-violet-700',
       )}
     >
       {option.emoji && (
@@ -33,11 +33,11 @@ export function OptionCard({ option, isSelected, onSelect, multiSelect = false }
       )}
 
       <div className="flex-1 min-w-0">
-        <p className={cn('font-semibold text-slate-800 leading-snug', isSelected && 'text-violet-700')}>
+        <p className={cn('font-semibold text-slate-800 dark:text-white leading-snug', isSelected && 'text-violet-700 dark:text-violet-400')}>
           {option.label}
         </p>
         {option.description && (
-          <p className="text-sm text-slate-400 mt-0.5 leading-snug">{option.description}</p>
+          <p className="text-sm text-slate-400 dark:text-slate-500 mt-0.5 leading-snug">{option.description}</p>
         )}
       </div>
 

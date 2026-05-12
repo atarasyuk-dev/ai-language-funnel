@@ -43,7 +43,7 @@ export function SliderStep({ question, answers, onNext }: SliderStepProps) {
         >
           {value}
         </motion.span>
-        <span className="text-sm text-slate-400">out of {max}</span>
+        <span className="text-sm text-slate-400 dark:text-slate-500">out of {max}</span>
       </div>
 
       <div className="flex flex-col gap-3 px-1">
@@ -58,7 +58,7 @@ export function SliderStep({ question, answers, onNext }: SliderStepProps) {
             max={max}
             value={value}
             onChange={handleChange}
-            className="relative w-full h-2 appearance-none bg-violet-100 rounded-full cursor-pointer
+            className="relative w-full h-2 appearance-none bg-violet-100 dark:bg-slate-700 rounded-full cursor-pointer
               [&::-webkit-slider-thumb]:appearance-none
               [&::-webkit-slider-thumb]:w-6
               [&::-webkit-slider-thumb]:h-6
@@ -77,7 +77,7 @@ export function SliderStep({ question, answers, onNext }: SliderStepProps) {
           />
         </div>
 
-        <div className="flex justify-between text-xs text-slate-400 px-1">
+        <div className="flex justify-between text-xs text-slate-400 dark:text-slate-500 px-1">
           <span>{question.minLabel}</span>
           <span>{question.maxLabel}</span>
         </div>

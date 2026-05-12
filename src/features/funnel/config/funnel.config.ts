@@ -23,6 +23,7 @@ export const funnelConfig: FunnelQuestion[] = [
     step: 1,
     type: 'single-select',
     title: 'What is your main English goal?',
+    titleB: 'What do you want to achieve in English?',
     subtitle: "We'll build your AI tutor plan around this.",
     required: true,
     options: [

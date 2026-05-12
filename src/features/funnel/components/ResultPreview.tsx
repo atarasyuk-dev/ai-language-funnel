@@ -1,6 +1,7 @@
 // src/features/funnel/components/ResultPreview.tsx
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, Lock } from 'lucide-react';
 import {
@@ -27,8 +28,28 @@ const itemVariants = {
   visible: { opacity: 1, x: 0, transition: { type: 'spring' as const, stiffness: 300, damping: 24 } },
 };
 
+function easeOut(t: number): number {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+function useCountUp(target: number, duration = 900): number {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    let startTime: number | null = null;
+    const animate = (now: number) => {
+      if (!startTime) startTime = now;
+      const progress = Math.min((now - startTime) / duration, 1);
+      setCount(Math.round(easeOut(progress) * target));
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, [target, duration]);
+  return count;
+}
+
 export function ResultPreview({ answers, onNext }: ResultPreviewProps) {
   const score = getReadinessScore(answers);
+  const displayScore = useCountUp(score);
   const items = getResultPreviewItems(answers);
   const { estimatedTimeline } = getPlanSummary(answers);
   const goalLabel = getGoalLabel(answers.goal ?? '');
@@ -43,7 +64,7 @@ export function ResultPreview({ answers, onNext }: ResultPreviewProps) {
           transition={{ type: 'spring', stiffness: 200, damping: 18, delay: 0.1 }}
           className="text-6xl font-bold leading-none mb-1"
         >
-          {score}%
+          {displayScore}%
         </motion.p>
         <p className="text-sm text-violet-200">
           ready to reach {goalLabel} in {estimatedTimeline}
@@ -60,17 +81,17 @@ export function ResultPreview({ answers, onNext }: ResultPreviewProps) {
           <motion.div
             key={item}
             variants={itemVariants}
-            className="flex items-center gap-3 bg-white border-2 border-violet-100 rounded-2xl px-4 py-3"
+            className="flex items-center gap-3 bg-white dark:bg-slate-800 border-2 border-violet-100 dark:border-slate-700 rounded-2xl px-4 py-3"
           >
             <CheckCircle2 className="w-5 h-5 text-violet-500 flex-shrink-0" />
-            <span className="text-slate-700 font-medium text-sm">{item}</span>
+            <span className="text-slate-700 dark:text-slate-200 font-medium text-sm">{item}</span>
           </motion.div>
         ))}
 
         {/* Teaser — full plan visible after sign-up */}
         <motion.div
           variants={itemVariants}
-          className="flex items-center gap-3 bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl px-4 py-3 opacity-60"
+          className="flex items-center gap-3 bg-slate-50 dark:bg-slate-800/50 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 opacity-60"
         >
           <Lock className="w-5 h-5 text-slate-400 flex-shrink-0" />
           <span className="text-slate-400 text-sm">Full breakdown unlocked after sign-up</span>

@@ -9,11 +9,11 @@ type MobileShellProps = {
 
 export function MobileShell({ children, className }: MobileShellProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-indigo-50 flex items-start justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 flex items-start justify-center">
       <div
         className={cn(
           'w-full max-w-md min-h-screen flex flex-col px-5 pt-6 pb-10',
-          'sm:min-h-0 sm:my-8 sm:rounded-3xl sm:shadow-xl sm:border sm:border-violet-100 sm:bg-white',
+          'sm:min-h-0 sm:my-8 sm:rounded-3xl sm:shadow-xl sm:border sm:border-violet-100 dark:sm:border-slate-800 sm:bg-white dark:sm:bg-slate-900',
           className,
         )}
       >

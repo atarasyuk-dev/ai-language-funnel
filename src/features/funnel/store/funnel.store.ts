@@ -13,6 +13,7 @@ type FunnelStore = FunnelState & {
   setSubmitting: (value: boolean) => void;
   setSubmitted: (value: boolean) => void;
   setError: (message: string | null) => void;
+  setAbVariant: (variant: 'A' | 'B') => void;
 };
 
 const initialState: FunnelState = {
@@ -22,6 +23,7 @@ const initialState: FunnelState = {
   isSubmitted: false,
   error: null,
   direction: 'forward',
+  abVariant: 'A',
 };
 
 export const useFunnelStore = create<FunnelStore>((set) => ({
@@ -51,4 +53,6 @@ export const useFunnelStore = create<FunnelStore>((set) => ({
   setSubmitted: (value) => set({ isSubmitted: value }),
 
   setError: (message) => set({ error: message }),
+
+  setAbVariant: (variant) => set({ abVariant: variant }),
 }));

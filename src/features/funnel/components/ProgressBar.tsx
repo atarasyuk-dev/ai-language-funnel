@@ -20,13 +20,13 @@ export function ProgressBar({ currentStep, totalSteps, canGoBack, onBack }: Prog
         onClick={onBack}
         disabled={!canGoBack}
         aria-label="Go back"
-        className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full text-violet-400 hover:text-violet-600 hover:bg-violet-50 transition-colors disabled:opacity-0 disabled:pointer-events-none"
+        className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full text-violet-400 hover:text-violet-600 hover:bg-violet-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-0 disabled:pointer-events-none"
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
 
       <div className="flex-1 flex flex-col gap-1">
-        <div className="h-1.5 w-full bg-violet-100 rounded-full overflow-hidden">
+        <div className="h-1.5 w-full bg-violet-100 dark:bg-slate-700 rounded-full overflow-hidden">
           <motion.div
             className="h-full bg-violet-500 rounded-full"
             animate={{ width: `${progress}%` }}
@@ -35,7 +35,7 @@ export function ProgressBar({ currentStep, totalSteps, canGoBack, onBack }: Prog
         </div>
       </div>
 
-      <span className="flex-shrink-0 text-xs font-medium text-violet-400 w-14 text-right">
+      <span className="flex-shrink-0 text-xs font-medium text-violet-400 dark:text-violet-500 w-14 text-right">
         {currentStep} of {totalSteps}
       </span>
     </div>

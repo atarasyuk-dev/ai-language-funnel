@@ -31,6 +31,7 @@ export type FunnelQuestion = {
   step: number;
   type: FunnelQuestionType;
   title: string | ((answers: FunnelAnswers) => string);
+  titleB?: string | ((answers: FunnelAnswers) => string);
   subtitle?: string | ((answers: FunnelAnswers) => string);
   options?: FunnelOption[];
   required?: boolean;
@@ -49,6 +50,7 @@ export type FunnelState = {
   isSubmitted: boolean;
   error: string | null;
   direction: FunnelDirection;
+  abVariant: 'A' | 'B';
 };
 
 export type SubmitPayload = {

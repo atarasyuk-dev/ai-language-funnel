@@ -1,23 +1,34 @@
 // src/features/funnel/components/Funnel.tsx
 'use client';
 
+import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useFunnelStore } from '../store/funnel.store';
 import { useFunnelNavigation } from '../hooks/useFunnelNavigation';
+import { trackEvent } from '../utils/analytics';
 import { ProgressBar } from './ProgressBar';
 import { FunnelStep } from './FunnelStep';
 import { SuccessScreen } from './SuccessScreen';
 
 export function Funnel() {
-  const { isSubmitting, isSubmitted, error, setSubmitting, setSubmitted, setError, setAnswer } =
+  const { isSubmitting, isSubmitted, error, setSubmitting, setSubmitted, setError, setAnswer, setAbVariant } =
     useFunnelStore();
   const { currentQuestion, answers, direction, canGoBack, handleNext, handleBack } =
     useFunnelNavigation();
+
+  useEffect(() => {
+    const variant: 'A' | 'B' = Math.random() < 0.5 ? 'A' : 'B';
+    setAbVariant(variant);
+    trackEvent('ab_variant_assigned', { step: 1, variant });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function handleSubmit(email: string) {
     setAnswer('email', email);
     setSubmitting(true);
     setError(null);
+
+    trackEvent('email_submitted', { goal: answers.goal, level: answers.level });
 
     try {
       const res = await fetch('/api/submit', {
@@ -34,6 +45,7 @@ export function Funnel() {
         throw new Error(data.error ?? 'Something went wrong. Please try again.');
       }
 
+      trackEvent('funnel_completed', { goal: answers.goal, level: answers.level });
       setSubmitted(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong.');
