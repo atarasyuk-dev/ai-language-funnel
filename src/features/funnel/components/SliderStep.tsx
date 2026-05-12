@@ -1,6 +1,7 @@
 // src/features/funnel/components/SliderStep.tsx
 'use client';
 
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/shared/components/Button';
 import { useFunnelStore } from '../store/funnel.store';
@@ -17,6 +18,13 @@ export function SliderStep({ question, answers, onNext }: SliderStepProps) {
   const min = question.min ?? 1;
   const max = question.max ?? 10;
   const value = (answers[question.id] as number | undefined) ?? Math.round((min + max) / 2);
+
+  useEffect(() => {
+    if (answers[question.id] === undefined) {
+      setAnswer(question.id, Math.round((min + max) / 2));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [question.id]);
   const percent = ((value - min) / (max - min)) * 100;
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

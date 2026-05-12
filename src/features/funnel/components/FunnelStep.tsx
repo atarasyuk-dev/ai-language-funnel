@@ -49,7 +49,7 @@ type StepContentProps = {
 };
 
 function StepContent({ question, answers, onNext, onSubmit, isSubmitting, error }: StepContentProps) {
-  const { setAnswer } = useFunnelStore();
+  const { setAnswer, nextStep, setError } = useFunnelStore();
 
   if (question.type === 'single-select' || question.type === 'multi-select') {
     const currentValue = answers[question.id];
@@ -57,7 +57,10 @@ function StepContent({ question, answers, onNext, onSubmit, isSubmitting, error 
     function handleSelect(optionId: string) {
       setAnswer(question.id, optionId);
       if (question.type === 'single-select') {
-        setTimeout(onNext, 200);
+        setTimeout(() => {
+          setError(null);
+          nextStep();
+        }, 200);
       }
     }
 

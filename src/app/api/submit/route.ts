@@ -36,6 +36,10 @@ export async function POST(request: Request) {
     );
   }
 
+  if (process.env.SKIP_TELEGRAM === 'true') {
+    return NextResponse.json({ success: true });
+  }
+
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
 

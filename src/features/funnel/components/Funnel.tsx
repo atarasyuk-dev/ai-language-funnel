@@ -9,12 +9,13 @@ import { FunnelStep } from './FunnelStep';
 import { SuccessScreen } from './SuccessScreen';
 
 export function Funnel() {
-  const { isSubmitting, isSubmitted, error, setSubmitting, setSubmitted, setError } =
+  const { isSubmitting, isSubmitted, error, setSubmitting, setSubmitted, setError, setAnswer } =
     useFunnelStore();
   const { currentQuestion, answers, direction, canGoBack, handleNext, handleBack } =
     useFunnelNavigation();
 
   async function handleSubmit(email: string) {
+    setAnswer('email', email);
     setSubmitting(true);
     setError(null);
 

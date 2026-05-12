@@ -21,6 +21,10 @@ export function validateStep(step: number, answers: FunnelAnswers): ValidationRe
 
   const value = answers[question.id];
 
+  if (question.type === 'result-preview') {
+    return { valid: true, error: null };
+  }
+
   if (question.type === 'slider') {
     const numValue = typeof value === 'number' ? value : NaN;
     const isValid = validateSlider(numValue, question.min ?? 1, question.max ?? 10);
