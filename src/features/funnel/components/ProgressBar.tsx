@@ -1,3 +1,4 @@
+// src/features/funnel/components/ProgressBar.tsx
 'use client';
 
 import { motion } from 'framer-motion';

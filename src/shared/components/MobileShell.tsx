@@ -1,3 +1,4 @@
+// src/shared/components/MobileShell.tsx
 import type { ReactNode } from 'react';
 import { cn } from '../lib/cn';
 

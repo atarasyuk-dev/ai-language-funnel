@@ -1,3 +1,4 @@
+// src/features/funnel/types/funnel.types.ts
 export type FunnelQuestionType =
   | 'single-select'
   | 'multi-select'

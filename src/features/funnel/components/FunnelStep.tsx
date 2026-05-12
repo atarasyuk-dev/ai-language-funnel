@@ -1,8 +1,8 @@
+// src/features/funnel/components/FunnelStep.tsx
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { OptionCard } from './OptionCard';
-import { Button } from '@/shared/components/Button';
 import { useFunnelStore } from '../store/funnel.store';
 import type { FunnelQuestion, FunnelAnswers, FunnelDirection } from '../types/funnel.types';
 

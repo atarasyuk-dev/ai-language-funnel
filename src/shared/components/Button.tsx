@@ -1,3 +1,4 @@
+// src/shared/components/Button.tsx
 'use client';
 
 import { motion } from 'framer-motion';

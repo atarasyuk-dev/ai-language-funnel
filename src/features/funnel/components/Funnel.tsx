@@ -1,3 +1,4 @@
+// src/features/funnel/components/Funnel.tsx
 'use client';
 
 import { useFunnelStore } from '../store/funnel.store';
@@ -6,8 +7,8 @@ import { ProgressBar } from './ProgressBar';
 import { FunnelStep } from './FunnelStep';
 
 export function Funnel() {
-  const { isSubmitting, isSubmitted, error } = useFunnelStore();
-  const { setSubmitting, setSubmitted, setError } = useFunnelStore();
+  const { isSubmitting, isSubmitted, error, setSubmitting, setSubmitted, setError } =
+    useFunnelStore();
   const { currentQuestion, answers, direction, canGoBack, handleNext, handleBack } =
     useFunnelNavigation();
 

@@ -1,3 +1,4 @@
+// src/features/funnel/hooks/useFunnelNavigation.ts
 'use client';
 
 import { useFunnelStore } from '../store/funnel.store';

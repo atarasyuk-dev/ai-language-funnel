@@ -1,3 +1,4 @@
+// src/features/funnel/config/funnel.config.ts
 import type { FunnelQuestion, FunnelAnswers } from '../types/funnel.types';
 
 export const TOTAL_STEPS = 10;

@@ -1,3 +1,4 @@
+// src/features/funnel/components/OptionCard.tsx
 'use client';
 
 import { motion } from 'framer-motion';
@@ -17,7 +18,7 @@ export function OptionCard({ option, isSelected, onSelect, multiSelect = false }
     <motion.button
       type="button"
       onClick={onSelect}
-      whileHover={{ y: -2, boxShadow: '0 4px 20px rgba(139,92,246,0.12)' }}
+      whileHover={{ y: -2 }}
       whileTap={{ scale: 0.97 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       className={cn(
