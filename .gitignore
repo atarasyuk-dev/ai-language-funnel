@@ -37,6 +37,7 @@ yarn-error.log*
 CLAUDE.md
 AGENTS.md
 STYLE.md
+ACTION_LOG.md
 
 # vercel
 .vercel
