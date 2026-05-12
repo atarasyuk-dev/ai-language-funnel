@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Share2, RotateCcw } from 'lucide-react';
+import { Share2, RotateCcw } from 'lucide-react';
 import { useFunnelStore } from '../store/funnel.store';
 import type { FunnelAnswers } from '../types/funnel.types';
 
@@ -38,13 +38,34 @@ export function SuccessScreen({ answers }: SuccessScreenProps) {
 
   return (
     <div className="flex flex-col flex-1 items-center justify-center gap-6 py-8 text-center">
-      {/* Animated checkmark */}
+      {/* Animated checkmark — circle scales in, tick draws along path */}
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{ type: 'spring', stiffness: 200, damping: 16, delay: 0.1 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 16, delay: 0.05 }}
       >
-        <CheckCircle2 className="w-20 h-20 text-violet-500" strokeWidth={1.5} />
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <motion.circle
+            cx="40" cy="40" r="36"
+            stroke="#7c3aed"
+            strokeWidth="4"
+            fill="#ede9fe"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+          />
+          <motion.path
+            d="M24 40 L35 51 L56 29"
+            stroke="#7c3aed"
+            strokeWidth="4.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 0.4, ease: 'easeOut', delay: 0.45 }}
+          />
+        </svg>
       </motion.div>
 
       <motion.div

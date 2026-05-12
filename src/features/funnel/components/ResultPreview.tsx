@@ -9,6 +9,7 @@ import {
   getResultPreviewItems,
   getPlanSummary,
 } from '../utils/getPersonalizedCopy';
+import { Button } from '@/shared/components/Button';
 import type { FunnelAnswers } from '../types/funnel.types';
 
 type ResultPreviewProps = {
@@ -76,12 +77,9 @@ export function ResultPreview({ answers, onNext }: ResultPreviewProps) {
         </motion.div>
       </motion.div>
 
-      <button
-        onClick={onNext}
-        className="w-full bg-violet-600 text-white font-semibold py-4 rounded-2xl hover:bg-violet-700 active:bg-violet-800 transition-colors"
-      >
+      <Button onClick={onNext} fullWidth>
         Get my full plan →
-      </button>
+      </Button>
     </div>
   );
 }

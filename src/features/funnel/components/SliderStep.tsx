@@ -2,6 +2,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Button } from '@/shared/components/Button';
 import { useFunnelStore } from '../store/funnel.store';
 import type { FunnelQuestion, FunnelAnswers } from '../types/funnel.types';
 
@@ -74,12 +75,9 @@ export function SliderStep({ question, answers, onNext }: SliderStepProps) {
         </div>
       </div>
 
-      <button
-        onClick={onNext}
-        className="w-full bg-violet-600 text-white font-semibold py-4 rounded-2xl hover:bg-violet-700 active:bg-violet-800 transition-colors"
-      >
+      <Button onClick={onNext} fullWidth>
         Continue
-      </button>
+      </Button>
     </div>
   );
 }
