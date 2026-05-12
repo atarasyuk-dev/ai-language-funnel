@@ -3,17 +3,8 @@
 
 import { useFunnelStore } from '../store/funnel.store';
 import { funnelConfig, TOTAL_STEPS } from '../config/funnel.config';
+import { validateStep } from '../utils/validateFunnelAnswers';
 import type { FunnelAnswers } from '../types/funnel.types';
-
-function isStepValid(step: number, answers: FunnelAnswers): boolean {
-  const question = funnelConfig[step - 1];
-  if (!question?.required) return true;
-
-  const value = answers[question.id];
-  if (value === undefined || value === null || value === '') return false;
-  if (question.type === 'slider' && typeof value === 'number') return true;
-  return Boolean(value);
-}
 
 export function useFunnelNavigation() {
   const {
@@ -31,8 +22,9 @@ export function useFunnelNavigation() {
   const progress = ((currentStep - 1) / TOTAL_STEPS) * 100;
 
   function handleNext() {
-    if (!isStepValid(currentStep, answers)) {
-      setError('Please answer this question to continue.');
+    const { valid, error: stepError } = validateStep(currentStep, answers);
+    if (!valid) {
+      setError(stepError);
       return;
     }
     setError(null);
@@ -55,6 +47,6 @@ export function useFunnelNavigation() {
     progress,
     handleNext,
     handleBack,
-    isStepValid: (step: number) => isStepValid(step, answers),
+    isStepValid: (step: number) => validateStep(step, answers).valid,
   };
 }
