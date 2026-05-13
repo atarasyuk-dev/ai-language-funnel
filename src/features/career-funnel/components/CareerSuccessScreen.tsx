@@ -10,30 +10,6 @@ type CareerSuccessScreenProps = {
   answers: CareerAnswers;
 };
 
-function ImagePlaceholder({ prompt, aspect = '16/9', label }: { prompt: string; aspect?: string; label: string }) {
-  return (
-    <div style={{
-      width: '100%',
-      aspectRatio: aspect,
-      background: `repeating-linear-gradient(45deg, ${colors.creamDeep}, ${colors.creamDeep} 10px, ${colors.cream} 10px, ${colors.cream} 20px)`,
-      border: `2px dashed ${colors.border}`,
-      borderRadius: '16px',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-      textAlign: 'center',
-    }}>
-      <div style={{ fontSize: '11px', fontWeight: 700, color: colors.coral, letterSpacing: '0.1em', marginBottom: '8px', textTransform: 'uppercase' as const }}>
-        🍌 Nanobanana Slot — {label}
-      </div>
-      <div style={{ fontSize: '12px', color: colors.muted, fontStyle: 'italic', lineHeight: 1.5, maxWidth: '90%' }}>
-        {prompt}
-      </div>
-    </div>
-  );
-}
 
 function NextStep({ n, text }: { n: string; text: string }) {
   return (
@@ -98,10 +74,10 @@ export function CareerSuccessScreen({ answers }: CareerSuccessScreenProps) {
         transition={{ delay: 0.4 }}
         style={{ width: '100%', marginBottom: '24px' }}
       >
-        <ImagePlaceholder
-          aspect="4/3"
-          label="SUCCESS"
-          prompt="Same person from the hero image, now smiling slightly, looking at their phone. Warm lighting. Subtle hint of accomplishment. Editorial photography style."
+        <img
+          src="/result_career.png"
+          alt="Your plan is ready"
+          style={{ width: '100%', aspectRatio: '4/3', borderRadius: '16px', objectFit: 'cover', display: 'block' }}
         />
       </motion.div>
 

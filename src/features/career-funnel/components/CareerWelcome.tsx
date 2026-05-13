@@ -8,30 +8,6 @@ type CareerWelcomeProps = {
   onStart: () => void;
 };
 
-function ImagePlaceholder({ prompt, aspect = '16/9', label }: { prompt: string; aspect?: string; label: string }) {
-  return (
-    <div style={{
-      width: '100%',
-      aspectRatio: aspect,
-      background: `repeating-linear-gradient(45deg, ${colors.creamDeep}, ${colors.creamDeep} 10px, ${colors.cream} 10px, ${colors.cream} 20px)`,
-      border: `2px dashed ${colors.border}`,
-      borderRadius: '16px',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-      textAlign: 'center',
-    }}>
-      <div style={{ fontSize: '11px', fontWeight: 700, color: colors.coral, letterSpacing: '0.1em', marginBottom: '8px', textTransform: 'uppercase' as const }}>
-        🍌 Nanobanana Slot — {label}
-      </div>
-      <div style={{ fontSize: '12px', color: colors.muted, fontStyle: 'italic', lineHeight: 1.5, maxWidth: '90%' }}>
-        {prompt}
-      </div>
-    </div>
-  );
-}
 
 export function CareerWelcome({ onStart }: CareerWelcomeProps) {
   return (
@@ -48,10 +24,10 @@ export function CareerWelcome({ onStart }: CareerWelcomeProps) {
       </div>
 
       <div style={{ marginBottom: '32px' }}>
-        <ImagePlaceholder
-          aspect="4/3"
-          label="HERO"
-          prompt="Confident professional in their 30s, mid-conversation in a modern office meeting room. Natural warm lighting, slight cinematic depth-of-field. They look engaged, not staged. Editorial style. No text overlay."
+        <img
+          src="/hero.png"
+          alt="Professional in a meeting"
+          style={{ width: '100%', aspectRatio: '4/3', borderRadius: '16px', objectFit: 'cover', display: 'block' }}
         />
       </div>
 
