@@ -23,15 +23,15 @@ export function CareerOptionCard({ option, isSelected, onSelect }: CareerOptionC
       style={{
         width: '100%',
         padding: '16px 18px',
-        background: isSelected ? colors.ink : colors.cream,
-        border: `2px solid ${isSelected ? colors.ink : colors.border}`,
+        background: isSelected ? colors.inkSoft : colors.cream,
+        border: `2px solid ${isSelected ? colors.inkSoft : colors.border}`,
         borderRadius: '14px',
         textAlign: 'left',
         cursor: 'pointer',
         display: 'flex',
         alignItems: 'center',
         gap: '14px',
-        boxShadow: isSelected ? `0 8px 24px ${colors.ink}25` : `0 1px 0 ${colors.border}50`,
+        boxShadow: isSelected ? `0 8px 24px ${colors.inkSoft}25` : `0 1px 0 ${colors.border}50`,
       }}
     >
       {(Icon || iconColor) && (

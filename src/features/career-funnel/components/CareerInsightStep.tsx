@@ -37,7 +37,7 @@ export function CareerInsightStep({ answers }: CareerInsightStepProps) {
         background: colors.ink, borderRadius: '18px', padding: '24px', color: colors.cream,
       }}>
         <div style={{
-          fontSize: '48px', fontWeight: 700, color: colors.coral,
+          fontSize: '48px', fontWeight: 700, color: '#FFFFFF',
           lineHeight: 1, marginBottom: '6px', letterSpacing: '-0.03em',
         }}>
           {insight.stat}

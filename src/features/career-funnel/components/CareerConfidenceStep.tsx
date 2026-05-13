@@ -29,9 +29,9 @@ export function CareerConfidenceStep({ answers }: CareerConfidenceStepProps) {
             style={{
               flex: 1,
               aspectRatio: '1',
-              border: `2px solid ${value === n ? colors.ink : colors.border}`,
-              background: value === n ? colors.ink : colors.cream,
-              color: value === n ? colors.cream : colors.ink,
+              border: `2px solid ${value === n ? colors.inkSoft : colors.border}`,
+              background: value === n ? colors.inkSoft : colors.cream,
+              color: value === n ? '#FFFFFF' : colors.ink,
               borderRadius: '12px',
               fontSize: '20px',
               fontWeight: 700,
